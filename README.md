@@ -15,8 +15,8 @@ This pipeline performs basic sentiment analysis (positive / neutral / negative) 
 ## Technical requirements
 - **Python 3.11+**
 - **JupyterLab** for experimentation
-- **Requests** and **BeautifulSoup4** for fetching and parsing data
+- **Requests** for fetching data
 - **Pandas / NumPy** for data processing
-- **TextBlob / NLTK** for sentiment analysis
+- **NLTK** for sentiment analysis (tbc.)
 - **Matplotlib** for visualization
 - **Git + GitHub** for version control
