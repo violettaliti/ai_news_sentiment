@@ -2,6 +2,3 @@
 .DS_Store
 .env
 **/__pycache__/ # ** means anywhere
-
-# experiement scripts
-/experiments
