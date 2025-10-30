@@ -16,10 +16,10 @@ class Preprocessor:
                     new_text = t.strip().replace("\n", " ")
                     cleaned.append(new_text)
                 else:
-                    # skip non-string entries but print a small notice
+                    # skip non-string entries but print a small notice to flag
                     print(f"Skipping non-string value: {t}")
             except Exception as e:
-                print(f"Error cleaning text: {e}")
+                print(f"Something went wrong with cleaning text --> Error message: {type(e).__name__} - {e}.")
         return cleaned
 
 if __name__ == "__main__":
