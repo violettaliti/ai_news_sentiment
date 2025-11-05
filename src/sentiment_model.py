@@ -34,8 +34,7 @@ class SentimentModel1:
         self.neg_words = set(negative_words or default_neg)
         self.neutral_margin = float(neutral_margin)
 
-    # --- public API ---------------------------------------------------------
-
+    # public API
     def predict(self, texts: List[str]) -> List[str]:
         """
         Predict sentiment labels for a list of texts.
@@ -47,7 +46,7 @@ class SentimentModel1:
                 label = self._predict_one(t)
                 labels.append(label)
             except Exception:
-                # Fail-safe: treat problematic entries as neutral
+                # fail-safe: treat problematic entries as neutral
                 labels.append("neu")
         return labels
 
@@ -65,7 +64,7 @@ class SentimentModel1:
             outputs.append(scores)
         return outputs
 
-    # --- internal helpers ---------------------------------------------------
+    # internal helpers
 
     def _predict_one(self, text: str) -> str:
         scores = self._score_one(text)
@@ -104,10 +103,10 @@ class SentimentModel2:
         positive_words: Iterable[str] | None = None,
         negative_words: Iterable[str] | None = None,
         negations: Iterable[str] | None = None,
-        neutral_threshold: float = 0.05,   # score in [-1,1]; |score| <= threshold -> 'neu'
-        exclamation_boost: float = 0.05,   # per '!' boost of magnitude
-        negative_weight: float = 1.2,      # negatives count a bit stronger than positives
-        norm_exponent: float = 0.7,        # sublinear normalization exponent
+        neutral_threshold: float = 0.05, # score in [-1,1]; |score| <= threshold -> 'neu'
+        exclamation_boost: float = 0.05, # per '!' boost of magnitude
+        negative_weight: float = 1.2, # negatives count a bit stronger than positives
+        norm_exponent: float = 0.7, # sublinear normalization exponent
     ):
         self.neutral_threshold = float(neutral_threshold)
         self.exclamation_boost = float(exclamation_boost)
@@ -120,8 +119,7 @@ class SentimentModel2:
             or {"not", "no", "never", "kein", "keine", "keinen", "keinem", "keiner", "niemals", "nicht"}
         )
 
-    # ----------------------- public API -------------------------------------
-
+    # public API
     def predict(self, texts: List[str]) -> List[str]:
         """Return labels 'pos' | 'neu' | 'neg' for a list of texts."""
         out: List[str] = []
@@ -150,8 +148,7 @@ class SentimentModel2:
             probs.append({"pos": pos / s, "neu": neu / s, "neg": neg / s})
         return probs
 
-    # ----------------------- internals --------------------------------------
-
+    # internals
     def _label_from_score(self, score: float) -> str:
         if score >  self.neutral_threshold:
             return "pos"
@@ -218,7 +215,7 @@ class SentimentModel2:
                 val = 1.0
                 positives += 1
             elif tok in self.neg_words:
-                val = -self.negative_weight   # negatives weigh a bit more
+                val = -self.negative_weight # negatives weigh a bit more
                 negatives += 1
 
             if val != 0.0:
@@ -249,8 +246,6 @@ class SentimentModel2:
             score = -1.0
         return score
 
-
-# --- CLI demo ---------------------------------------------------------------
 if __name__ == "__main__":
     samples = [
         "AI shows strong progress with promising innovation and great results.",
