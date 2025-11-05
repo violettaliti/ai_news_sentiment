@@ -1,6 +1,6 @@
 # evaluation.py
 import pandas as pd
-from sentiment_model import SentimentModel1, SentimentModel2 # make sure this file is in the same folder
+from src.sentiment_model import SentimentModel1, SentimentModel2 # make sure this file is in the same folder
 
 class Evaluator:
     """
