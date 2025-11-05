@@ -1,5 +1,5 @@
 """
-preprocess.py clean and prepares the news articles for futher analysis.
+preprocess.py clean and prepares the news articles for further analysis.
 """
 
 class Preprocessor:
